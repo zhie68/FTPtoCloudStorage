@@ -109,7 +109,7 @@ namespace project
             string ftpurl = ConfigurationManager.AppSettings.Get("ftpurl");
             string ftuser = ConfigurationManager.AppSettings.Get("ftpuser");
             string ftpass = ConfigurationManager.AppSettings.Get("ftppass");
-            //FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("ftp://172.21.73.118:10022/");
+           
             FtpWebRequest Request = (FtpWebRequest)WebRequest.Create(ftpurl);
             Request.Method = WebRequestMethods.Ftp.ListDirectory;
             Request.Credentials = new NetworkCredential(ftuser, ftpass);
@@ -130,8 +130,7 @@ namespace project
         //upload to Cloud
         private void upcloud()
         {
-            // ChromeDriverService service = ChromeDriverService.CreateDefaultService(@"../../../Driver/97/");
-            
+           
             String SelectedText = this.comboBox1.SelectedItem.ToString();
             
             label1.Text = "Login To CloudStorage";
@@ -157,37 +156,20 @@ namespace project
             //var driver = new ChromeDriver(service, options);
             var driver = new ChromeDriver(service, options);
 
-            //ICapabilities capabilities = ((ChromeDriver)driver).Capabilities;
-            //var ChrDriver = (capabilities.GetCapability("chrome") as Dictionary<string, object>)["chromedriverVersion"];
-            //var BrowVer = capabilities.GetCapability("browserVersion");
-            //String Cdrv = ChrDriver.ToString().Remove(9);
-            //String Bdrv = BrowVer.ToString().Remove(9);
-            //label4.Text = "Chrome Driver Version " + Cdrv[0..3];
-            //label5.Text = "Chrome Version " + Bdrv[0..3];
-
-            //if (Cdrv != Bdrv)
-            //{
-            //    GetVer(Bdrv);
-            //}
-           
-            //var driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("http://cloudstorage.krakatauposco.co.id/login");
+            
+            driver.Navigate().GoToUrl("yoururlcloud/login");
 
             IWebElement userx = driver.FindElement(By.Id("user"));
             IWebElement passwordx = driver.FindElement(By.Id("password"));
             IWebElement loginx = driver.FindElement(By.Id("submit"));
-            //IWebElement loginxl = driver.FindElement(By.Id("file_upload_start"));
-
-
-            //userx.SendKeys("eic2");
-            //passwordx.SendKeys("kp130");
+           
             userx.SendKeys(cluser);
             passwordx.SendKeys(clpass);
 
 
             loginx.Click();
             driver.Navigate().GoToUrl(urlpm);
-            //loginxl.Click();
+      
             if (SelectedText == "Furnace")
             {
                 driver.Navigate().GoToUrl(urlfce);
@@ -210,7 +192,7 @@ namespace project
             IWebElement tx = driver.FindElement(By.ClassName("icon-add"));
             tx.Click();
             IWebElement droparea = driver.FindElement(By.Id("file_upload_start"));
-            //droparea.SendKeys("C:\\S_FileManager.zip");
+            
             string selected_file = listBox1.GetItemText(listBox1.SelectedItem);
 
             droparea.SendKeys("C:\\Local\\" + selected_file);
@@ -323,13 +305,13 @@ namespace project
         {
 
             //list dict
-            const string baseurl = "http://cloudstorage.krakatauposco.co.id/";
+            const string baseurl = "yourcloudurl";
             CookieContainer cookie;
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(baseurl);
 
             req.Method = "POST";
             req.ContentType = "application/x-www-form-urlencoded";
-            string login = string.Format("go=&Fuser={0}&Fpass={1}", "pmpcteam", "P@ssw0rd");
+            string login = string.Format("go=&Fuser={0}&Fpass={1}", "youruser", "yourpass");
             byte[] postbuf = Encoding.ASCII.GetBytes(login);
             req.ContentLength = postbuf.Length;
             Stream rs = req.GetRequestStream();

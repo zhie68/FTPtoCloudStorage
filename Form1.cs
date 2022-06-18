@@ -329,7 +329,7 @@ namespace project
             
 
             ///adadadadadadawd
-            string url = "http://cloudstorage.krakatauposco.co.id/apps/files/";
+            string url = "yoururl";
             List<string> files = new List<string>(500);
             HttpWebRequest requestd = (HttpWebRequest)WebRequest.Create(url);
             using (HttpWebResponse response = (HttpWebResponse)requestd.GetResponse())
@@ -385,7 +385,7 @@ namespace project
                     (request as HttpWebRequest).UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36";
                     (request as HttpWebRequest).Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
                     (request as HttpWebRequest).Headers.Add(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.9");
-                    (request as HttpWebRequest).Referer = "http://cloudstorage.krakatauposco.co.id";
+                    (request as HttpWebRequest).Referer = "yoururl";
                     (request as HttpWebRequest).KeepAlive = true;
                     (request as HttpWebRequest).AutomaticDecompression = DecompressionMethods.Deflate |
                                                                          DecompressionMethods.GZip;
@@ -456,7 +456,7 @@ namespace project
             string ftpurl = ConfigurationManager.AppSettings.Get("ftpurl");
             string selected_file = listBox1.GetItemText(listBox1.SelectedItem);
             string local = @"C:\Local";
-           // String url = "ftp://172.21.73.118:10022/";
+           
             NetworkCredential credentials = new NetworkCredential(ftuser,ftpass);
             if (!Directory.Exists(local))
             {
@@ -467,8 +467,7 @@ namespace project
             listRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
             listRequest.Credentials = credentials;
             
-            //listRequest.Method = WebRequestMethods.Ftp.GetFileSize;
-            //int size = (int)listRequest.GetResponse().ContentLength;
+            
 
             List<string> lines = new List<string>();
 
@@ -544,13 +543,7 @@ namespace project
                                 string g = d.ToString();
                                 progressBar1.Invoke((MethodInvoker)(() => progressBar1.Value = x));
 
-                                //progressBar1.CreateGraphics().DrawString(g+"  kb", SystemFonts.SmallCaptionFont,
-                                //    Brushes.Black,
-                                //    new PointF(progressBar1.Width / 2 - (progressBar1.CreateGraphics().MeasureString(g+ "  kb",
-                                //    SystemFonts.DefaultFont).Width / 2.0F),
-                                //    progressBar1.Height / 2 - (progressBar1.CreateGraphics().MeasureString(g + "  kb",
-                                //    SystemFonts.DefaultFont).Height / 2.0F)));
-
+                               
                             }
                            
                         }
@@ -578,7 +571,7 @@ namespace project
             string ftuser = ConfigurationManager.AppSettings.Get("ftpuser");
             string ftpass = ConfigurationManager.AppSettings.Get("ftppass");
             string ftpurl = ConfigurationManager.AppSettings.Get("ftpurl");
-            //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://172.21.73.118:10022/" + fileName);
+            
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpurl + selected_file);
             request.Method = WebRequestMethods.Ftp.DeleteFile;
             request.Credentials = new NetworkCredential(ftuser,ftpass);
@@ -620,14 +613,7 @@ namespace project
                 
             }
             
-            //var doc = new HtmlAgilityPack.HtmlDocument();
-            //doc.LoadHtml("http://cloudstorage.krakatauposco.co.id/apps/files/?dir=/Plate%20Mill%20L2%20Data%20Request&fileid=1138107");
-
-            //// InnerHtml 
-            //var innerHtml = doc.DocumentNode.InnerHtml;
-
-            //// InnerText 
-            //var innerText = doc.DocumentNode.InnerText;
+            
 
 
 
@@ -702,68 +688,7 @@ namespace project
                 }
                 //j++;
             }
-            //for (int i = 2; i < 5; i++)
-            //{
-            //    var nodesd = doc.QuerySelectorAll(getversion);
-            //    string cd = nodesd[0].InnerHtml.ToString().Trim().Remove(3);
-                
-            //    if (cd == ChVer)
-            //      {
-            //        string ds = nodesd[0].InnerHtml.TrimStart().TrimEnd();
-            //        string newlink = getlink + ds;
-                   
-            //        WebClient client = new WebClient();
-            //        client.DownloadFile(newlink, "chromedriver.nupkg");
-            //        break;
-            //    }
-            //      else
-            //      {
-            //           getversion = getversion.Replace("tr:nth-child(1)", "tr:nth-child(" + i + ")");    
-            //      }
-            //}
-
-                //string ddc = "/html/body/div[3]/section/div/div/div[3]/div[5]/div/table/tbody/tr[1]/td[1]/a/text()";
-                //string urll = "/html/body/div[3]/section/div/div/div[3]/div[5]/div/table/tbody/tr[1]/td[1]/a";
-
-                //string selecr = "#version-history > table > tbody > tr:nth-child(1)";
-                //var nodexs = doc.DocumentNode.SelectNodes(selecr);
-                //for (int i = 1; i < 5; i++)
-                //{
-
-                //    string newstr = ddc.Replace("tr[1]", "tr[" + i + "]");
-                //    var node = doc.DocumentNode.SelectSingleNode(newstr);
-
-                //    string vs = node.InnerHtml.ToString().Trim().Remove(3);
-                //    var fg = doc.GetElementbyId("href");
-                //    if (vs == ChVer)
-                //    {
-                //        string newurl = urll.Replace("tr[1]", "tr[" + i + "]");
-                //        var nodex = doc.DocumentNode.SelectSingleNode(newurl);
-                //        string fe = nodex.OuterHtml;
-                //        doc.LoadHtml(fe);
-                //        var anchor = doc.DocumentNode.SelectSingleNode("//a");
-                //        if (anchor != null)
-                //        {
-                //            string link = "https://www.nuget.org" + anchor.Attributes["href"].Value;
-                //            HtmlAgilityPack.HtmlDocument doc2 = web.Load(link);
-                //            string gw = "/html/body/div[3]/section/div/aside/div[2]/ul/li[5]/a";
-                //            var nodexx = doc2.DocumentNode.SelectSingleNode(gw);
-                //            string fex = nodexx.OuterHtml;
-                //            doc2.LoadHtml(fex);
-                //            var anchorx = doc2.DocumentNode.SelectSingleNode("//a");
-                //            if (anchorx != null)
-                //            {
-                //                string linkx = anchorx.Attributes["href"].Value;
-                //                WebClient client = new WebClient();
-                //                client.DownloadFile(linkx, "chromedriver.nupkg");
-                //            }
-
-                //            Console.WriteLine(link);
-                //        }
-                //        break;
-                //    }
-
-                //}
+            
                 
                 using (FileStream file = File.OpenRead("chromedriver.nupkg"))
                 {
@@ -808,7 +733,7 @@ namespace project
             cmd.StartInfo.RedirectStandardOutput = true;
             cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
-            //cmd.StartInfo.WorkingDirectory = @"C:\Users\kp1hmi01\source\repos\project\project\bin\Debug\net6.0-windows";
+           
             cmd.StartInfo.WorkingDirectory = dr;
             cmd.Start();
 
